@@ -39,6 +39,8 @@ p{text-wrap:pretty}
 .hero{position:relative;height:min(74vh,700px);min-height:440px;overflow:hidden;background:#000;user-select:none}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero .top{clip-path:inset(0 0 0 var(--x,50%))}
+.hero .top{width:150%;max-width:none;object-position:49% 50%;clip-path:none}
+.hero .topwrap{position:absolute;inset:0;overflow:hidden;clip-path:inset(0 0 0 var(--x,50%))}
 .hero input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;z-index:3;touch-action:pan-y}
 .hero .bar{position:absolute;top:0;bottom:0;left:var(--x,50%);width:1.5px;background:#fff;z-index:2;pointer-events:none}
 .hero .knob{position:absolute;top:44%;left:var(--x,50%);transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;padding:9px 12px;background:#fff;color:#111;font:500 11px var(--m);letter-spacing:.04em;z-index:2;pointer-events:none;white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.25)}
@@ -112,8 +114,6 @@ p{text-wrap:pretty}
 .ki{position:absolute;right:10px;bottom:10px;font:500 10px/1 var(--m);background:#fff;color:#111;padding:6px 7px;letter-spacing:.04em}
 .disc{grid-column:1/-1;margin:-20px 0 40px}
 .plan3{background:var(--paper2)}
-.plan3 svg{position:absolute;inset:0;width:100%;height:100%}
-.plan3 .ln{fill:none;stroke:var(--ink);stroke-width:1.2}
 .plan3 .fo{position:absolute;top:14px;right:14px;font:500 11px var(--m);color:var(--mute)}
 /* ---------- Hausaufteilen (eigener Bereich) ---------- */
 .split{background:var(--dark);color:var(--dark-fg)}
@@ -238,7 +238,7 @@ p{text-wrap:pretty}
 
 <header class="hero" id="hero">
   <img src="img/dresden.jpg" alt="Dresden, Altstadt an der Elbe">
-  <img class="top" src="img/leipzig.jpg" alt="Leipzig, Altes Rathaus">
+  <div class="topwrap"><img class="top" src="img/leipzig.jpg" alt="Leipzig, Blick über die Stadt zum Völkerschlachtdenkmal"></div>
   <div class="shade"></div>
   <span class="city l">DRESDEN<small>51.05° N · 13.74° E</small></span>
   <span class="city r">LEIPZIG<small>51.34° N · 12.37° E</small></span>
@@ -304,7 +304,7 @@ p{text-wrap:pretty}
     <div class="stock">
       <figure class="st"><div class="ph"><img src="img/b1.jpg" alt="Mehrfamilienhaus in Dresden-Löbtau mit Balkonen" loading="lazy" style="object-position:center 60%"><div class="spec"><span class="k">B1</span><span>DRESDEN-LÖBTAU</span><span>766 m²</span><span>9 WE</span></div></div></figure>
       <figure class="st"><div class="ph"><img src="img/b2.jpg" alt="Mehrfamilienhaus in Dresden-Pieschen mit ausgebautem Dachgeschoss" loading="lazy" style="object-position:center 40%"><div class="spec"><span class="k">B2</span><span>DRESDEN-PIESCHEN</span><span>576 m²</span><span>13 WE</span></div></div></figure>
-      <figure class="st"><div class="ph plan3"><svg viewBox="0 0 840 360" role="img" aria-label="Schematische Ansicht eines Mehrfamilienhauses in Leipzig-Holzhausen"><g class="ln"><path d="M300 330V120H560V330M290 120H570M300 120L340 60H520L560 120"/><path d="M280 330H580"/></g><g class="ln w"></g></svg><span class="fo">Foto folgt</span><div class="spec"><span class="k">B3</span><span>LEIPZIG-HOLZHAUSEN</span><span>471 m²</span><span>7 WE</span></div></div></figure>
+      <figure class="st"><div class="ph plan3"><img src="img/b3z.jpg" alt="Architekturzeichnung der Straßenfassade des Hauses in Leipzig-Holzhausen" loading="lazy" style="object-fit:contain"><span class="fo">Fassadenzeichnung</span><div class="spec"><span class="k">B3</span><span>LEIPZIG-HOLZHAUSEN</span><span>471 m²</span><span>7 WE</span></div></div></figure>
     </div>
     <div class="stock-note"><span class="m">WE = Wohneinheiten · Flächen laut Mietaufstellung · Fotos teils KI-nachbearbeitet (Licht, Auflösung)</span><span class="m">Gehalten über Schwestergesellschaften (GbR), nicht über die Saguttarius Capital GmbH</span></div>
   </section>
@@ -349,7 +349,6 @@ p{text-wrap:pretty}
 
 <script>
 (function(){const b=document.getElementById("cb");let seen=null;try{seen=localStorage.getItem("cb_ok")}catch(e){}if(!seen)b.hidden=false;document.getElementById("cbok").addEventListener("click",()=>{b.hidden=true;try{localStorage.setItem("cb_ok","1")}catch(e){}})})();
-(function(){const g=document.querySelector(".plan3 .w");if(!g)return;let d="";for(let f=0;f<4;f++)for(let a=0;a<5;a++){const x=318+a*48,y=140+f*46;d+=`M${x} ${y}h22v30h-22z`}const p=document.createElementNS("http://www.w3.org/2000/svg","path");p.setAttribute("d",d);g.appendChild(p)})();
 const hero=document.getElementById("hero"),sl=document.getElementById("slider");
 sl.addEventListener("input",()=>hero.style.setProperty("--x",sl.value+"%"));
 
