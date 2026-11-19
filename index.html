@@ -233,6 +233,8 @@ p{text-wrap:pretty}
 .cb[hidden]{display:none!important}
 .cb button{flex:none;font:500 13px var(--f);background:var(--blue);color:#fff;border:0;padding:10px 14px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.hero .knob,.hero .knob{width:46px;height:46px;padding:0;justify-content:center;border-radius:50%}
+.hero .knob svg{width:22px;height:22px;fill:none;stroke:var(--blue);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body>
@@ -244,7 +246,7 @@ p{text-wrap:pretty}
   <div class="shade"></div>
   <span class="city l">DRESDEN<small>51.05° N · 13.74° E</small></span>
   <span class="city r">LEIPZIG<small>51.34° N · 12.37° E</small></span>
-  <div class="bar"></div><div class="knob"><i>◂</i> SCHIEBEN <i>▸</i></div>
+  <div class="bar"></div><div class="knob" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></div>
   <input type="range" min="0" max="100" value="50" aria-label="Zwischen Dresden und Leipzig schieben" id="slider">
   <div class="nav"><img src="img/logo.png" alt="Saguttarius Capital"><nav><a href="#portfolio">Portfolio</a><a href="#vorsorge">Vorsorge</a><a href="#kontakt">Kontakt</a></nav></div>
   <div class="copy"><h1><span>Immobilienwerte</span><span>für Generationen.</span></h1><p class="sub">Wir entwickeln und halten Wohnimmobilien in Dresden und Leipzig.</p></div>
