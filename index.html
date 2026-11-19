@@ -41,7 +41,8 @@ p{text-wrap:pretty}
 .hero .top{clip-path:inset(0 0 0 var(--x,50%))}
 .hero .top{width:150%;max-width:none;object-position:49% 50%;clip-path:none}
 .hero .topwrap{position:absolute;inset:0;overflow:hidden;clip-path:inset(0 0 0 var(--x,50%))}
-.hero input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;z-index:3;touch-action:pan-y}
+.hero{touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize}
+.hero input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;z-index:3;pointer-events:none}
 .hero .bar{position:absolute;top:0;bottom:0;left:var(--x,50%);width:1.5px;background:#fff;z-index:2;pointer-events:none}
 .hero .knob{position:absolute;top:44%;left:var(--x,50%);transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;padding:9px 12px;background:#fff;color:#111;font:500 11px var(--m);letter-spacing:.04em;z-index:2;pointer-events:none;white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.25)}
 .hero .knob i{font-style:normal;color:var(--blue)}
@@ -351,7 +352,12 @@ p{text-wrap:pretty}
 <script>
 (function(){const b=document.getElementById("cb");let seen=null;try{seen=localStorage.getItem("cb_ok")}catch(e){}if(!seen)b.hidden=false;document.getElementById("cbok").addEventListener("click",()=>{b.hidden=true;try{localStorage.setItem("cb_ok","1")}catch(e){}})})();
 const hero=document.getElementById("hero"),sl=document.getElementById("slider");
-sl.addEventListener("input",()=>hero.style.setProperty("--x",sl.value+"%"));
+const setX=p=>{p=Math.max(3,Math.min(97,p));hero.style.setProperty("--x",p+"%");sl.value=Math.round(p)};
+const fromX=x=>{const r=hero.getBoundingClientRect();setX((x-r.left)/r.width*100)};let drag=false;
+hero.addEventListener("pointerdown",e=>{if(e.target.closest("a,button"))return;drag=true;fromX(e.clientX);try{hero.setPointerCapture(e.pointerId)}catch(_){}});
+hero.addEventListener("pointermove",e=>{if(drag)fromX(e.clientX)});
+["pointerup","pointercancel"].forEach(t=>hero.addEventListener(t,()=>drag=false));
+sl.addEventListener("input",()=>setX(+sl.value));
 
 /* Fassade: 5 Achsen, 4 Geschosse, ausgebautes Dach (blau), Maßlinien */
 (function(){
